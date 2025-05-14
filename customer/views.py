@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import ServiceType, ServiceRequest
-from .forms import ServiceRequestForm, AttachmentForm
+from .models import Attachment, ServiceType, ServiceRequest
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.forms import modelformset_factory
+from .forms import ServiceRequestForm, AttachmentForm, FileCountForm
 
 @login_required
 def customer_dashboard(request):
@@ -22,29 +23,49 @@ def customer_signup(request):
 
 @login_required
 def submit_request(request):
+    AttachmentFormSet = modelformset_factory(Attachment, form=AttachmentForm, extra=5)
+
     if request.method == 'POST':
-        service_request_form = ServiceRequestForm(request.POST)
-        attachment_form = AttachmentForm(request.POST, request.FILES)
+        if 'file_count' in request.POST:
+            # Phase 1 submitted
+            count_form = FileCountForm(request.POST)
+            if count_form.is_valid():
+                file_count = count_form.cleaned_data['file_count']
+                AttachmentFormSet = modelformset_factory(Attachment, form=AttachmentForm, extra=file_count)  # override here
+                service_request_form = ServiceRequestForm()
+                attachment_formset = AttachmentFormSet(queryset=Attachment.objects.none())
 
-        if service_request_form.is_valid() and attachment_form.is_valid():
-            service_request = service_request_form.save(commit=False)
-            service_request.customer = request.user
-            service_request.save()
+                return render(request, 'customer/request_form.html', {
+                    'count_form': count_form,
+                    'service_request_form': service_request_form,
+                    'attachment_formset': attachment_formset,
+                    'show_forms': True
+                })
+        else:
+            # Phase 2 submitted
+            service_request_form = ServiceRequestForm(request.POST)
+            attachment_formset = AttachmentFormSet(request.POST, request.FILES)
 
-            # Now save the attachment
-            attachment = attachment_form.save(commit=False)
-            attachment.request = service_request  # Link the attachment to the service request
-            attachment.save()
+            if service_request_form.is_valid() and attachment_formset.is_valid():
+                service_request = service_request_form.save(commit=False)
+                service_request.customer = request.user
+                service_request.save()
 
-            return redirect('customer:request_status')
+                for form in attachment_formset:
+                    if form.cleaned_data.get('file'):
+                        attachment = form.save(commit=False)
+                        attachment.request = service_request
+                        attachment.save()
+
+                return redirect('customer:request_status')
     else:
-        service_request_form = ServiceRequestForm()
-        attachment_form = AttachmentForm()
+        count_form = FileCountForm()
 
     return render(request, 'customer/request_form.html', {
-        'service_request_form': service_request_form,
-        'attachment_form': attachment_form,
+        'count_form': count_form,
+        'show_forms': False
     })
+
 
 @login_required
 def track_requests(request):
