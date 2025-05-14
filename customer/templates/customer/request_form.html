@@ -2,28 +2,21 @@
 <html>
 <head>
     <title>Submit Service Request</title>
+
 </head>
 <body>
     <h2>Submit a Service Request</h2>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+        {{ service_request_form.as_p }}
 
-        {% if not show_forms %}
-            {{ count_form.as_p }}
-            <button type="submit">Next</button>
+        <div id="file-inputs">
+            <input type="file" name="attachments" multiple>
+        </div>
 
-        {% else %}
-            {{ service_request_form.as_p }}
-            {{ attachment_formset.management_form }}
-            {% for form in attachment_formset %}
-                {{ form.as_p }}
-            {% endfor %}
-            <button type="submit">Submit Request</button>
-        {% endif %}
-
+        <button type="submit">Submit Request</button>
     </form>
-
 
     <p><a href="{% url 'customer:dashboard' %}">Back to Dashboard</a></p>
 </body>
