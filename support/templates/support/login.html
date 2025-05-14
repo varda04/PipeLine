@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Support Staff Login</title>
+</head>
+<body>
+    <h2>Support Login</h2>
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color:red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <label>Username: <input type="text" name="username"></label><br><br>
+        <label>Password: <input type="password" name="password"></label><br><br>
+        <button type="submit">Login</button>
+    </form>
+    <p><a href="{% url 'homepage' %}">Return to home page</a></p>
+</body>
+</html>

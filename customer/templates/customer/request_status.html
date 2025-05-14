@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Requests</title>
+</head>
+<body>
+    <h2>My Service Requests</h2>
+    {% if requests %}
+        <ul>
+        {% for request in requests %}
+            <li>
+                <strong>{{ request.service_type }}</strong><br>
+                Created at: {{ request.created_at }}<br>
+                Current status: {{ request.status_logs.last.status }}<br>
+
+                {% if request.submitted_at %}
+                    Submitted on: {{ request.submitted_at }}<br>
+                {% endif %}
+
+                {% if request.resolved_at %}
+                    Resolved on: {{ request.resolved_at }}<br>
+                {% endif %}
+
+                {% if request.resolution_duration %}
+                    Total resolution time: {{ request.resolution_duration }}<br>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No requests found.</p>
+    {% endif %}
+
+    <p><a href="{% url 'customer:dashboard' %}">Back to Dashboard</a></p>
+</body>
+</html>

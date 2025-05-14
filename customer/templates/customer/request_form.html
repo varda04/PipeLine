@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Service Request</title>
+</head>
+<body>
+    <h2>Submit a Service Request</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ service_request_form.as_p }}
+        {{ attachment_form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <p><a href="{% url 'customer:dashboard' %}">Back to Dashboard</a></p>
+</body>
+</html>

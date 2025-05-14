@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Support Dashboard</title>
+</head>
+<body>
+    <h2>Support Staff Dashboard</h2>
+
+    <!-- Filter Form -->
+    <form method="get" action="">
+        <label for="status_filter">Filter by Status:</label>
+        <select name="status" id="status_filter" onchange="this.form.submit()">
+            <option value="">-- All --</option>
+            <option value="Pending" {% if selected_status == 'Pending' %}selected{% endif %}>Pending</option>
+            <option value="In Progress" {% if selected_status == 'In Progress' %}selected{% endif %}>In Progress</option>
+            <option value="Resolved" {% if selected_status == 'Resolved' %}selected{% endif %}>Resolved</option>
+        </select>
+    </form>
+
+    <hr>
+
+    {% if requests %}
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Service Type</th>
+                <th>Submitted</th>
+                <th>Current Status</th>
+                <th>Change Status</th>
+            </tr>
+            {% for req in requests %}
+            <tr>
+                <td>{{ req.id }}</td>
+                <td>{{ req.customer.username }}</td>
+                <td>{{ req.service_type }}</td>
+                <td>{{ req.created_at }}</td>
+                <td>{{ req.current_status }}</td>
+                <td>
+                    <form method="post" action="{% url 'support:update_status' req.id %}">
+                        {% csrf_token %}
+                        <select name="new_status">
+                            <option value="Pending" {% if req.current_status == 'Pending' %}selected{% endif %}>Pending</option>
+                            <option value="In Progress" {% if req.current_status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                            <option value="Resolved" {% if req.current_status == 'Resolved' %}selected{% endif %}>Resolved</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No service requests found.</p>
+    {% endif %}
+    <p><a href="{% url 'homepage' %}">Return to home page</a></p>
+</body>
+</html>
