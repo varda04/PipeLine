@@ -1,4 +1,10 @@
-<h1 align="center"> <br> <img src="https://ibb.co/1trmW7P7" alt="PipeLine Logo" width="150"> <br> PipeLine <br> </h1> <h4 align="center">A Django-powered gas utility portal connecting customers and support staff seamlessly — all through one PipeLine 💡</h4> <p align="center"> <a href="#key-features">Key Features</a> • <a href="#getting-started">Getting Started</a> • <a href="#usage">Usage</a> • <a href="#tech-stack">Tech Stack</a> • <a href="#license">License</a> </p>
+<h1 align="center">
+  <br>
+  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.png" alt="Markdownify" width="200"></a>
+  <br>
+  Markdownify
+  <br>
+</h1> <h4 align="center">A Django-powered gas utility portal connecting customers and support staff seamlessly — all through one PipeLine 💡</h4> <p align="center"> <a href="#key-features">Key Features</a> • <a href="#getting-started">Getting Started</a> • <a href="#usage">Usage</a> • <a href="#tech-stack">Tech Stack</a> • <a href="#license">License</a> </p>
 📌 Why the name "PipeLine"?
 It’s a wordplay on gas pipelines and the support workflow pipeline — a neat metaphor for connecting customer issues through a clean and efficient system.
 
