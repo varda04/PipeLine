@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://imgbb.com/"><img src="https://i.ibb.co/Pvc6HFPF/PipeLine.png" alt="PipeLine" border="0"></a>
+  <img src="https://i.ibb.co/Pvc6HFPF/PipeLine.png" alt="PipeLine" border="0">
   <br>
   PipeLine
   <br>
