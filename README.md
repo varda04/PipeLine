@@ -20,7 +20,7 @@ It’s a wordplay on gas pipelines and the support workflow pipeline — a neat 
 To run this project locally, make sure you have Python and Django installed. Then:
 # Clone the repository
 ```
-git clone https://github.com/varda04/pipeline.git
+git clone https://github.com/varda04/PipeLine.git
 ```
 
 # Install dependencies (ideally in a virtual environment)
