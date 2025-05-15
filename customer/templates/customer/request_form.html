@@ -2,22 +2,98 @@
 <html>
 <head>
     <title>Submit Service Request</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
 
+        .container {
+            max-width: 600px;
+            margin: 60px auto;
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 20px;
+            color: #495057;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        select,
+        textarea {
+            margin-top: 8px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+        }
+
+        input[type="file"] {
+            padding: 8px;
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h2>Submit a Service Request</h2>
+    <div class="container">
+        <h2>Submit a Service Request</h2>
 
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ service_request_form.as_p }}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ service_request_form.as_p }}
 
-        <div id="file-inputs">
-            <input type="file" name="attachments" multiple>
-        </div>
+            <label for="attachments">Attach Files</label>
+            <input type="file" name="attachments" id="attachments" multiple>
 
-        <button type="submit">Submit Request</button>
-    </form>
+            <button type="submit">Submit Request</button>
+        </form>
 
-    <p><a href="{% url 'customer:dashboard' %}">Back to Dashboard</a></p>
+        <a href="{% url 'customer:dashboard' %}">← Back to Dashboard</a>
+    </div>
 </body>
 </html>

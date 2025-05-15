@@ -2,6 +2,54 @@
 <html>
 <head>
     <title>Your Requests</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 50px auto;
+            background: #f9fafb;
+            color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.08);
+            line-height: 1.5;
+        }
+        strong {
+            font-size: 1.1em;
+            color: #2980b9;
+        }
+        p, li {
+            font-size: 16px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 30px;
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #1c5980;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <h2>My Service Requests</h2>
@@ -31,6 +79,6 @@
         <p>No requests found.</p>
     {% endif %}
 
-    <p><a href="{% url 'customer:dashboard' %}">Back to Dashboard</a></p>
+    <p><a href="{% url 'customer:dashboard' %}">← Back to Dashboard</a></p>
 </body>
 </html>

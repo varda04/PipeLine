@@ -15,16 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.shortcuts import render
 from django.urls import path, include
 from django.http import HttpResponse
 from django.contrib.auth import views as auth_views
 
 def homepage(request):
-    return HttpResponse("""
-        <h1>Welcome to Gas Utility Service</h1>
-        <p><a href='/customer/'>I am a Customer</a></p>
-        <p><a href='/support/'>I am a Support Representative</a></p>
-    """)
+    return render(request, 'main/homepage.html')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
